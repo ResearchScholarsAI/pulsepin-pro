@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover, user-scalable=no" />
+  <title>پالس‌پین پرو | PulsePin Pro</title>
+  <meta name="description" content="فلزیاب VLF واقعی با حلقهٔ مسی روی جک ۳.۵ میلی‌متری — بهینه برای Galaxy A03s" />
+  <meta name="theme-color" content="#0b0d0c" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="PulsePin Pro" />
+  <link rel="manifest" href="/manifest.webmanifest" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="apple-touch-icon" href="/icons/icon-192.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Vazirmatn:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/app.css" />
+</head>
+<body>
+  <div id="app">
+    <header class="header">
+      <div>
+        <p class="eyebrow">PulsePin Pro</p>
+        <h1>پالس‌پین پرو</h1>
+      </div>
+      <span id="device-badge" class="badge">گوشی</span>
+    </header>
+
+    <section class="meter-panel">
+      <div class="meter-wrap">
+        <svg id="meter" viewBox="0 0 200 200" aria-hidden="true"></svg>
+      </div>
+      <div class="readouts">
+        <div class="ro"><span>سیگنال</span><strong id="sig">000</strong></div>
+        <div class="ro"><span>TID</span><strong id="tid">—</strong></div>
+        <div class="ro"><span>عمق</span><strong id="depth">—</strong><small>cm</small></div>
+        <div class="ro"><span>اطمینان</span><strong id="conf">—</strong><small>%</small></div>
+      </div>
+      <div class="target-row">
+        <div class="phase-dial" id="phase-dial"></div>
+        <div class="target-info">
+          <div class="target-label">هدف</div>
+          <div class="target-value" id="kind">—</div>
+          <div class="target-sub" id="kind-sub">منتظر هدف…</div>
+          <div class="meta">
+            <span id="tx">TX 5200 Hz</span>
+            <span id="coil-status">آماده</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <p id="error" class="error hidden"></p>
+    <p id="warn" class="warn hidden"></p>
+
+    <div class="actions">
+      <button id="arm-btn" class="btn primary">مسلح کردن</button>
+      <button id="gb-btn" class="btn" disabled>بالانس زمین</button>
+    </div>
+
+    <section class="panel">
+      <p class="panel-title">حالت شکار</p>
+      <div class="mode-grid" id="modes">
+        <button data-mode="vlf" class="mode active">VLF حلقه</button>
+        <button data-mode="pinpoint" class="mode">پین‌پوینت</button>
+        <button data-mode="allmetal" class="mode">همه‌فلز</button>
+        <button data-mode="mag" class="mode">مغناطیس</button>
+      </div>
+    </section>
+
+    <section class="panel row">
+      <div>
+        <p class="panel-title">تفکیک</p>
+        <select id="disc">
+          <option value="all">همه</option>
+          <option value="jewelry">جواهرات</option>
+          <option value="coins">سکه</option>
+          <option value="fe-only">فقط آهنی</option>
+          <option value="nfe-only">فقط غیرآهنی</option>
+        </select>
+      </div>
+      <div>
+        <p class="panel-title">بازخورد صوتی</p>
+        <select id="feedback">
+          <option value="click">کلیک</option>
+          <option value="pitch">پین‌پوینت (زیر و بم)</option>
+          <option value="tone">تون ثابت</option>
+          <option value="silent">بی‌صدا</option>
+        </select>
+      </div>
+    </section>
+
+    <section class="panel">
+      <label class="slider-label">حساسیت <span id="sens-val">8</span></label>
+      <input type="range" id="sens" min="1" max="15" value="8" />
+      <label class="slider-label">ولوم TX <span id="vol-val">88%</span></label>
+      <input type="range" id="vol" min="15" max="100" value="88" />
+      <div class="checks">
+        <label><input type="checkbox" id="vibe" checked /> ویبره</label>
+        <label><input type="checkbox" id="audio" checked /> صدا</label>
+      </div>
+    </section>
+
+    <section class="panel guide">
+      <p class="panel-title">راهنمای سریع حلقه (A03s)</p>
+      <ol>
+        <li>دوشاخهٔ چهارپل CTIA را جدا کنید.</li>
+        <li>سیم‌پیچ را بین نوک (L) و زمین وصل کنید.</li>
+        <li>مقاومت ۲.۲k روی پین میکروفون سری بگذارید.</li>
+        <li>اگر مقاومت کل < ۱۵Ω است، ۱۰۰Ω سری روی خروجی بگذارید.</li>
+      </ol>
+      <p class="note">عمق واقعی روی آهن متوسط حدود ۱۵–۲۲ سانتی‌متر است. روی طلای کوچک چند سانتی‌متر — محدودیت فیزیک آمپلی‌فایر گوشی.</p>
+    </section>
+
+    <footer class="footer">
+      <span>یافته‌های جلسه: <strong id="finds">0</strong></span>
+      <button id="install-btn" class="install hidden">نصب اپ</button>
+    </footer>
+  </div>
+
+  <script src="/js/dsp.js"></script>
+  <script src="/js/engine.js"></script>
+  <script src="/js/app.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/sw.js').catch(() => {});
+    }
+  </script>
+</body>
+</html>
