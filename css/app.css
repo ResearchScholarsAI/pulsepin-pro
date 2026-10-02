@@ -1,0 +1,290 @@
+:root {
+  --bg: #0b0d0c;
+  --surface: #141816;
+  --surface2: #1c211e;
+  --fg: #e8eee9;
+  --muted: #8b958e;
+  --dim: #5c6560;
+  --line: #2a322e;
+  --phosphor: #7dffb2;
+  --hot: #ef6b5a;
+  --fe: #c4a484;
+  --nfe: #7eb8d4;
+  --ok: #6bcf8e;
+  --warn: #d4b06a;
+  --font: "Vazirmatn", Tahoma, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, monospace;
+}
+
+* { box-sizing: border-box; }
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font);
+  min-height: 100dvh;
+  -webkit-font-smoothing: antialiased;
+}
+body { padding-bottom: env(safe-area-inset-bottom); }
+
+#app {
+  max-width: 420px;
+  margin: 0 auto;
+  padding: max(12px, env(safe-area-inset-top)) 16px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.eyebrow {
+  margin: 0;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+h1 {
+  margin: 2px 0 0;
+  font-size: 22px;
+  font-weight: 600;
+}
+.badge {
+  font-size: 10px;
+  border: 1px solid var(--line);
+  padding: 3px 8px;
+  border-radius: 4px;
+  color: var(--muted);
+}
+.badge.a03s {
+  border-color: color-mix(in srgb, var(--phosphor) 50%, transparent);
+  color: var(--phosphor);
+}
+
+.meter-panel {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 8px 10px 14px;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.35);
+}
+.meter-wrap {
+  width: min(70vw, 260px);
+  margin: 0 auto;
+  aspect-ratio: 1;
+}
+#meter { width: 100%; height: 100%; }
+
+.readouts {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+  margin-top: 4px;
+  text-align: center;
+}
+.ro {
+  background: var(--surface2);
+  border-radius: 8px;
+  padding: 6px 2px;
+}
+.ro span {
+  display: block;
+  font-size: 9px;
+  color: var(--muted);
+}
+.ro strong {
+  font-family: var(--mono);
+  font-size: 15px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+.ro strong.hot { color: var(--hot); }
+.ro small { font-size: 9px; color: var(--muted); margin-right: 2px; }
+
+.target-row {
+  display: flex;
+  gap: 12px;
+  margin-top: 10px;
+  background: var(--surface2);
+  border-radius: 12px;
+  padding: 10px;
+  align-items: center;
+}
+.phase-dial {
+  width: 90px;
+  height: 90px;
+  flex-shrink: 0;
+}
+.target-info { flex: 1; min-width: 0; }
+.target-label { font-size: 11px; color: var(--muted); }
+.target-value {
+  font-size: 16px;
+  font-weight: 600;
+  margin-top: 2px;
+}
+.target-value.fe { color: var(--fe); }
+.target-value.nfe { color: var(--nfe); }
+.target-value.hotrock { color: var(--warn); }
+.target-sub { font-size: 11px; color: var(--muted); margin-top: 2px; }
+.meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  color: var(--muted);
+  margin-top: 6px;
+}
+.meta .ok { color: var(--ok); }
+
+.error, .warn {
+  margin: 0;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  line-height: 1.5;
+}
+.error {
+  background: color-mix(in srgb, var(--hot) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--hot) 40%, transparent);
+  color: var(--hot);
+}
+.warn {
+  background: var(--surface);
+  border: 1px solid color-mix(in srgb, var(--warn) 40%, transparent);
+  color: var(--warn);
+}
+.hidden { display: none !important; }
+
+.actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+.btn {
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--fg);
+  border-radius: 10px;
+  padding: 14px;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: var(--font);
+  cursor: pointer;
+}
+.btn:disabled { opacity: 0.4; cursor: not-allowed; }
+.btn.primary {
+  border-color: color-mix(in srgb, var(--phosphor) 50%, transparent);
+  background: color-mix(in srgb, var(--phosphor) 12%, transparent);
+  color: var(--phosphor);
+}
+.btn.danger {
+  border-color: color-mix(in srgb, var(--hot) 50%, transparent);
+  background: color-mix(in srgb, var(--hot) 12%, transparent);
+  color: var(--hot);
+}
+
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 12px;
+}
+.panel.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.panel-title {
+  margin: 0 0 8px;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--muted);
+}
+.mode-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+.mode {
+  border: 1px solid var(--line);
+  background: var(--surface2);
+  color: var(--muted);
+  border-radius: 8px;
+  padding: 10px 4px;
+  font-size: 12px;
+  font-family: var(--font);
+  cursor: pointer;
+}
+.mode.active {
+  border-color: color-mix(in srgb, var(--phosphor) 55%, transparent);
+  background: color-mix(in srgb, var(--phosphor) 14%, transparent);
+  color: var(--phosphor);
+}
+
+select {
+  width: 100%;
+  background: var(--surface2);
+  border: 1px solid var(--line);
+  color: var(--fg);
+  border-radius: 8px;
+  padding: 8px;
+  font-size: 12px;
+  font-family: var(--font);
+}
+
+.slider-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: var(--muted);
+  margin: 8px 0 4px;
+}
+input[type="range"] {
+  width: 100%;
+  accent-color: var(--phosphor);
+}
+.checks {
+  display: flex;
+  gap: 16px;
+  margin-top: 10px;
+  font-size: 12px;
+  color: var(--muted);
+}
+.checks input { accent-color: var(--phosphor); margin-left: 6px; }
+
+.guide ol {
+  margin: 0;
+  padding-right: 18px;
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--muted);
+}
+.guide .note {
+  margin: 10px 0 0;
+  font-size: 11px;
+  color: var(--dim);
+  line-height: 1.5;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  color: var(--muted);
+  padding-top: 4px;
+}
+.install {
+  border: 1px solid var(--phosphor);
+  background: transparent;
+  color: var(--phosphor);
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-family: var(--font);
+  cursor: pointer;
+}
